@@ -5,9 +5,13 @@ const tabs = document.querySelectorAll('.nav__tab'),
     maximize = document.querySelector('#maximize'),
     minimize = document.querySelector('#minimize'),
     elem = document.body,
+<<<<<<< HEAD
     next = document.querySelectorAll('.btn'),
     section = document.querySelectorAll('section');
     
+=======
+    next = document.querySelectorAll('.btn');
+>>>>>>> efc8d625f06f2dcf6549396e1ebdf053c8250ea3
 
 
 
@@ -56,6 +60,7 @@ tabs.forEach((item, i) => {
             hideClass();
             item.classList.toggle('active');
             addressBar.innerText = `daniilbakach.github.io/${tabsText[i]}`;
+<<<<<<< HEAD
             section.forEach((item)=>{
                 item.classList.add('hide');
                 item.classList.remove('show');
@@ -63,6 +68,8 @@ tabs.forEach((item, i) => {
             section[i].classList.remove('hide');
             section[i].classList.add('show');
 
+=======
+>>>>>>> efc8d625f06f2dcf6549396e1ebdf053c8250ea3
         }
 
 
@@ -73,10 +80,13 @@ next.forEach((item, i) => {
     item.addEventListener('click', () => {
         hideClass();
         tabs[i + 1].classList.add('active');
+<<<<<<< HEAD
         section[i].classList.remove('show');
         section[i].classList.add('hide');
         section[i+1].classList.add('show');
         section[i+1].classList.remove('hide');
+=======
+>>>>>>> efc8d625f06f2dcf6549396e1ebdf053c8250ea3
     });
 });
 
