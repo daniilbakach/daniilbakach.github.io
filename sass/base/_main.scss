@@ -1,0 +1,100 @@
+.nav {
+    background-color: $bgColor;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    &__wrapper {
+        margin-left: 4px;
+        height: 35px;
+        display: flex;
+        justify-content: space-between;
+    }
+    &__tabs {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    &__tab {
+        position: relative;
+        width: 190px;
+        height: 35px;
+        background-color: $tabColor;
+        text-align: left;
+        padding-left: 10px;
+        border-radius: 8px 8px 0 0;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        &::before {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 1px;
+            height: 21px;
+            background-color: black;
+            top: 10px;
+            left: -1px;
+            z-index: 2;
+        }
+        &:first-child {
+            &::before {
+                content: '';
+                display: none;
+            }
+        }
+    }
+    &__text {
+        padding-left: 8px;
+        font-size: 14px;
+        color: $textColor;
+        text-decoration: none;
+    }
+    &__logo {
+        max-height: 17px;
+        max-width: 17px;
+    }
+    &__address {
+        background-color: $clr;
+        border-bottom: 1px solid $tabColor;
+        padding: 8px 20px;
+    }
+    &__bar {
+        height: 100%;
+        background-color: $tabColor;
+        border-radius: 14px;
+        vertical-align: middle;
+        padding: 5px 15px;
+        &-text {
+            display: inline;
+        }
+    }
+    &__lock {
+        max-width: 12px;
+        max-height: 12px;
+        padding-right: 15px;
+    }
+}
+
+.active {
+    background: $clr;
+    border: none;
+    z-index: 3;
+    &::before {
+        content: '';
+        display: none;
+    }
+}
+
+.control {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    &__img {
+        width: 32px;
+        img {
+            max-width: 16px;
+            max-height: 16px;
+            cursor: pointer;
+        }
+    }
+}
