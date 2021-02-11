@@ -5,7 +5,12 @@ const tabs = document.querySelectorAll('.nav__tab'),
     maximize = document.querySelector('#maximize'),
     minimize = document.querySelector('#minimize'),
     elem = document.body,
-    next = document.querySelectorAll('.btn');
+
+    next = document.querySelectorAll('.btn'),
+    section = document.querySelectorAll('section');
+
+
+
 
 
 
@@ -54,6 +59,15 @@ tabs.forEach((item, i) => {
             hideClass();
             item.classList.toggle('active');
             addressBar.innerText = `daniilbakach.github.io/${tabsText[i]}`;
+
+            section.forEach((item) => {
+                item.classList.add('hide');
+                item.classList.remove('show');
+            });
+            section[i].classList.remove('hide');
+            section[i].classList.add('show');
+
+
         }
 
 
@@ -64,6 +78,12 @@ next.forEach((item, i) => {
     item.addEventListener('click', () => {
         hideClass();
         tabs[i + 1].classList.add('active');
+
+        section[i].classList.remove('show');
+        section[i].classList.add('hide');
+        section[i + 1].classList.add('show');
+        section[i + 1].classList.remove('hide');
+
     });
 });
 
