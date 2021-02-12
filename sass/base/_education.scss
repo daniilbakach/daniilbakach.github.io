@@ -7,9 +7,12 @@
         margin-top: 30px;
         padding-left: 15px;
     }
-    &__title {
+    &__quote {
         margin-top: 30px;
-        width: 230px;
+        background-color: rgba(255, 255, 255, 0.2);
+        span {
+            padding-right: 0;
+        }
     }
     &__subtitle {
         position: relative;

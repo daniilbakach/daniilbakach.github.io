@@ -1,5 +1,5 @@
 const tabs = document.querySelectorAll('.nav__tab'),
-    tabsText = ['', 'education', 'skills', 'languages', 'awards'],
+    tabsText = ['', 'education', 'skills', 'portfolio', 'awards'],
     addressBar = document.querySelector('.nav__bar-text'),
     close = document.querySelector('#close'),
     maximize = document.querySelector('#maximize'),
@@ -83,6 +83,7 @@ next.forEach((item, i) => {
         section[i].classList.add('hide');
         section[i + 1].classList.add('show');
         section[i + 1].classList.remove('hide');
+        addressBar.innerText = `daniilbakach.github.io/${tabsText[i+1]}`;
 
     });
 });
