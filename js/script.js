@@ -5,16 +5,9 @@ const tabs = document.querySelectorAll('.nav__tab'),
     maximize = document.querySelector('#maximize'),
     minimize = document.querySelector('#minimize'),
     elem = document.body,
-
+    tabSection = document.querySelectorAll('section'),
     next = document.querySelectorAll('.btn'),
     section = document.querySelectorAll('section');
-
-
-
-
-
-
-
 
 function hideClass() {
     tabs.forEach((item) => {
@@ -22,8 +15,6 @@ function hideClass() {
         item.classList.remove('active');
     });
 }
-
-
 
 function openFullscreen() {
     if (elem.requestFullscreen) {
@@ -49,41 +40,51 @@ function closeFullscreen() {
     }
 }
 
+function addClass(elem, addClass) {
+    elem.classList.add(addClass);
+}
 
+function removeClass(elem, removeClass) {
+    elem.classList.remove(removeClass);
+}
 
+function toggleClass(elem, toggleClass) {
+    elem.classList.toggle(toggleClass);
+}
+
+function changeAddressBar(index) {
+    addressBar.innerText = `daniilbakach.github.io/${tabsText[index]}`;
+}
 
 tabs.forEach((item, i) => {
     item.addEventListener('click', () => {
 
         if (!item.classList.contains('active')) {
             hideClass();
-            item.classList.toggle('active');
-            addressBar.innerText = `daniilbakach.github.io/${tabsText[i]}`;
-
+            toggleClass(item, 'active');
+            changeAddressBar(i);
             section.forEach((item) => {
-                item.classList.add('hide');
-                item.classList.remove('show');
+                addClass(item, "hide");
+                removeClass(item, "show");
             });
-            section[i].classList.remove('hide');
-            section[i].classList.add('show');
-
-
+            addClass(section[i], "show");
+            removeClass(section[i], "hide");
         }
 
 
 
     });
 });
+
 next.forEach((item, i) => {
     item.addEventListener('click', () => {
         hideClass();
-        tabs[i + 1].classList.add('active');
-
-        section[i].classList.remove('show');
-        section[i].classList.add('hide');
-        section[i + 1].classList.add('show');
-        section[i + 1].classList.remove('hide');
-        addressBar.innerText = `daniilbakach.github.io/${tabsText[i+1]}`;
+        addClass(tabs[i + 1], 'active');
+        removeClass(section[i], 'show');
+        addClass(section[i], 'hide');
+        addClass(section[i + 1], 'show');
+        removeClass(section[i + 1], 'hide');
+        changeAddressBar(i + 1);
 
     });
 });
