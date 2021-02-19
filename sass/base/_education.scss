@@ -6,6 +6,9 @@
         position: relative;
         margin-top: 30px;
         padding-left: 15px;
+        display: flex; 
+        justify-content: space-between;
+        flex-wrap: wrap;
     }
     &__quote {
         margin-top: 30px;
@@ -21,6 +24,7 @@
         background-color: rgba(255, 255, 255, 0.2);
         width: 500px;
         color: $textColor;
+
         &:before {
             content: "";
             position: absolute;
