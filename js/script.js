@@ -7,7 +7,10 @@ const tabs = document.querySelectorAll('.nav__tab'),
     elem = document.body,
     tabSection = document.querySelectorAll('section'),
     next = document.querySelectorAll('.btn'),
-    section = document.querySelectorAll('section');
+    section = document.querySelectorAll('section'),
+    modalWindow = document.querySelector('.modal'),
+    modalClose = document.querySelector('.modal__close'),
+    modalOpen = document.querySelectorAll('.contact');
 
 function hideClass() {
     tabs.forEach((item) => {
@@ -54,6 +57,11 @@ function toggleClass(elem, toggleClass) {
 
 function changeAddressBar(index) {
     addressBar.innerText = `daniilbakach.github.io/${tabsText[index]}`;
+}
+
+function modalHide() {
+    addClass(modalWindow, 'hide');
+    removeClass(modalWindow, 'show');
 }
 
 tabs.forEach((item, i) => {
@@ -109,4 +117,16 @@ minimize.addEventListener('click', () => {
     } else {
         alert("Это иллюзия, это не настоящий браузер");
     }
+});
+
+//modal
+modalClose.addEventListener('click', () => {
+    modalHide();
+
+});
+modalOpen.forEach(item => {
+    item.addEventListener('click', () => {
+        addClass(modalWindow, 'show');
+        removeClass(modalWindow, 'hide');
+    });
 });

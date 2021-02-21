@@ -42,6 +42,10 @@
             padding: 4px;
             border: 1px solid $bgColor;
             border-radius: 4px;
+            &:hover {
+                color: $clr;
+                background-color: $mainColor;
+            }
         }
     }
     &__btn {

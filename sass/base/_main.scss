@@ -86,15 +86,31 @@
 }
 
 .control {
+    margin: 6px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
     align-items: center;
     &__img {
-        width: 32px;
+        width: 30px;
+        text-align: center;
         img {
+            padding: 1px;
             max-width: 16px;
             max-height: 16px;
             cursor: pointer;
         }
+    }
+}
+
+#minimize,
+#maximize {
+    &:hover {
+        border: 1px solid $mainColor;
+    }
+}
+
+#close {
+    &:hover {
+        border: 1px solid rgb(161, 9, 9);
     }
 }
