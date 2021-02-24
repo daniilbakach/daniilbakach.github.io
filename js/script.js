@@ -10,7 +10,9 @@ const tabs = document.querySelectorAll('.nav__tab'),
     section = document.querySelectorAll('section'),
     modalWindow = document.querySelector('.modal'),
     modalClose = document.querySelector('.modal__close'),
-    modalOpen = document.querySelectorAll('.contact');
+    modalOpen = document.querySelectorAll('.contact'),
+    commercial = document.querySelector('.commercial'),
+    commercialClose = document.querySelector('.commercial__close');
 
 function hideClass() {
     tabs.forEach((item) => {
@@ -129,4 +131,7 @@ modalOpen.forEach(item => {
         addClass(modalWindow, 'show');
         removeClass(modalWindow, 'hide');
     });
+});
+commercialClose.addEventListener('click', () => {
+    addClass(commercial, 'hide');
 });
