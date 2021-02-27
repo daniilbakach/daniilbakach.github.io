@@ -5,7 +5,6 @@ const tabs = document.querySelectorAll('.nav__tab'),
     maximize = document.querySelector('#maximize'),
     minimize = document.querySelector('#minimize'),
     elem = document.body,
-    tabSection = document.querySelectorAll('section'),
     next = document.querySelectorAll('.btn'),
     section = document.querySelectorAll('section'),
     modalWindow = document.querySelector('.modal'),
@@ -13,8 +12,10 @@ const tabs = document.querySelectorAll('.nav__tab'),
     modalOpen = document.querySelectorAll('.contact'),
     commercial = document.querySelector('.commercial'),
     commercialClose = document.querySelector('.commercial__close'),
+    tabText = document.querySelectorAll(".nav__text"),
     hide = 'hide',
     show = 'show';
+windowWidth = window.innerWidth;
 
 function hideClass() {
     tabs.forEach((item) => {
@@ -143,8 +144,23 @@ modalOpen.forEach(item => {
 
 //commercial
 setTimeout(() => {
-    swapClass(commercial, 'flex', hide);
+    if (windowWidth > 992) {
+        swapClass(
+            commercial, 'flex', hide);
+    }
+
 }, 20000);
 commercialClose.addEventListener('click', () => {
     swapClass(commercial, hide, 'flex');
 });
+
+//adaptive
+if (windowWidth < 992) {
+    tabText[2].innerText = "Навыки";
+    tabText[4].innerText = "Награды";
+}
+if (windowWidth < 769) {
+    section.forEach((item) => {
+        swapClass(item, show, hide);
+    });
+}
