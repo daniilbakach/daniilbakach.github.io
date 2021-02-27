@@ -12,7 +12,9 @@ const tabs = document.querySelectorAll('.nav__tab'),
     modalClose = document.querySelector('.modal__close'),
     modalOpen = document.querySelectorAll('.contact'),
     commercial = document.querySelector('.commercial'),
-    commercialClose = document.querySelector('.commercial__close');
+    commercialClose = document.querySelector('.commercial__close'),
+    hide = 'hide',
+    show = 'show';
 
 function hideClass() {
     tabs.forEach((item) => {
@@ -53,6 +55,11 @@ function removeClass(elem, removeClass) {
     elem.classList.remove(removeClass);
 }
 
+function swapClass(elem, add, remove) {
+    addClass(elem, add);
+    removeClass(elem, remove);
+}
+
 function toggleClass(elem, toggleClass) {
     elem.classList.toggle(toggleClass);
 }
@@ -62,8 +69,11 @@ function changeAddressBar(index) {
 }
 
 function modalHide() {
-    addClass(modalWindow, 'hide');
-    removeClass(modalWindow, 'show');
+    swapClass(modalWindow, hide, show);
+}
+
+function toTop() {
+    window.scrollTo(0, 0);
 }
 
 tabs.forEach((item, i) => {
@@ -74,11 +84,10 @@ tabs.forEach((item, i) => {
             toggleClass(item, 'active');
             changeAddressBar(i);
             section.forEach((item) => {
-                addClass(item, "hide");
-                removeClass(item, "show");
+                swapClass(item, hide, show);
             });
-            addClass(section[i], "show");
-            removeClass(section[i], "hide");
+            swapClass(section[i], show, hide);
+            toTop();
         }
 
 
@@ -90,11 +99,10 @@ next.forEach((item, i) => {
     item.addEventListener('click', () => {
         hideClass();
         addClass(tabs[i + 1], 'active');
-        removeClass(section[i], 'show');
-        addClass(section[i], 'hide');
-        addClass(section[i + 1], 'show');
-        removeClass(section[i + 1], 'hide');
+        swapClass(section[i], hide, show);
+        swapClass(section[i + 1], show, hide);
         changeAddressBar(i + 1);
+        toTop();
 
     });
 });
@@ -128,10 +136,15 @@ modalClose.addEventListener('click', () => {
 });
 modalOpen.forEach(item => {
     item.addEventListener('click', () => {
-        addClass(modalWindow, 'show');
-        removeClass(modalWindow, 'hide');
+        swapClass(modalWindow, show, hide);
     });
 });
+
+
+//commercial
+setTimeout(() => {
+    swapClass(commercial, 'flex', hide);
+}, 20000);
 commercialClose.addEventListener('click', () => {
-    addClass(commercial, 'hide');
+    swapClass(commercial, hide, 'flex');
 });
