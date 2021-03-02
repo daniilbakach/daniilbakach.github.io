@@ -145,13 +145,11 @@ modalOpen.forEach(item => {
         openModalWindow();
     });
 });
- function showModalByScroll() {
-        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-          openModalWindow();
-            window.removeEventListener('scroll', showModalByScroll);
-        }
-    }
-    window.addEventListener('scroll', showModalByScroll);
+if(modalWindow.classList.contains('show')){
+    
+window.onscroll = function(){
+  return false;
+}}
 
 
 //commercial
