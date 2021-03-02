@@ -77,6 +77,11 @@ function toTop() {
     window.scrollTo(0, 0);
 }
 
+function openModalWindow(){
+       swapClass(modalWindow, show, hide);
+     clearInterval(modalTimer);
+}
+
 tabs.forEach((item, i) => {
     item.addEventListener('click', () => {
 
@@ -137,12 +142,12 @@ modalClose.addEventListener('click', () => {
 });
 modalOpen.forEach(item => {
     item.addEventListener('click', () => {
-        swapClass(modalWindow, show, hide);
+        openModalWindow();
     });
 });
  function showModalByScroll() {
         if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-           swapClass(modalWindow, show, hide);
+          openModalWindow();
             window.removeEventListener('scroll', showModalByScroll);
         }
     }
@@ -150,7 +155,7 @@ modalOpen.forEach(item => {
 
 
 //commercial
-setTimeout(() => {
+const modalTimer = setTimeout(() => {
     if (windowWidth > 992) {
         swapClass(
             commercial, 'flex', hide);
