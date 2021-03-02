@@ -140,6 +140,13 @@ modalOpen.forEach(item => {
         swapClass(modalWindow, show, hide);
     });
 });
+ function showModalByScroll() {
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+           swapClass(modalWindow, show, hide);
+            window.removeEventListener('scroll', showModalByScroll);
+        }
+    }
+    window.addEventListener('scroll', showModalByScroll);
 
 
 //commercial
