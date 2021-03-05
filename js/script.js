@@ -77,11 +77,6 @@ function toTop() {
     window.scrollTo(0, 0);
 }
 
-function openModalWindow(){
-       swapClass(modalWindow, show, hide);
-     clearInterval(modalTimer);
-}
-
 tabs.forEach((item, i) => {
     item.addEventListener('click', () => {
 
@@ -142,18 +137,13 @@ modalClose.addEventListener('click', () => {
 });
 modalOpen.forEach(item => {
     item.addEventListener('click', () => {
-        openModalWindow();
+        swapClass(modalWindow, show, hide);
     });
 });
-if(modalWindow.classList.contains('show')){
-    
-window.onscroll = function(){
-  return false;
-}}
 
 
 //commercial
-const modalTimer = setTimeout(() => {
+setTimeout(() => {
     if (windowWidth > 992) {
         swapClass(
             commercial, 'flex', hide);
