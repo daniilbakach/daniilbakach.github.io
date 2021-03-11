@@ -77,6 +77,14 @@ function toTop() {
     window.scrollTo(0, 0);
 }
 
+function closeByButton(item) {
+    document.addEventListener('keydown', (e) => {
+        if (e.code === "Escape" && item.classList.contains('show')) {
+            swapClass(item, 'hide', 'show')
+        }
+    });
+}
+
 tabs.forEach((item, i) => {
     item.addEventListener('click', () => {
 
@@ -133,13 +141,16 @@ minimize.addEventListener('click', () => {
 //modal
 modalClose.addEventListener('click', () => {
     modalHide();
+    document.body.style.overflow = '';
 
 });
 modalOpen.forEach(item => {
     item.addEventListener('click', () => {
         swapClass(modalWindow, show, hide);
+        document.body.style.overflow = 'hidden';
     });
 });
+closeByButton(modalWindow);
 
 
 //commercial
@@ -153,6 +164,23 @@ setTimeout(() => {
 commercialClose.addEventListener('click', () => {
     swapClass(commercial, hide, 'flex');
 });
+
+//advice
+windowAdvice = document.querySelector('.advice');
+closeByButton(windowAdvice);
+
+function showAdviceByScroll() {
+    if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+        swapClass(windowAdvice, 'show', 'hide');
+        window.removeEventListener('scroll', showAdviceByScroll);
+        document.body.style.overflow = 'hidden';
+    }
+}
+window.addEventListener('scroll', showAdviceByScroll);
+windowAdvice.addEventListener('click', () => {
+    swapClass(windowAdvice, 'hide', 'show');
+    document.body.style.overflow = '';
+})
 
 //adaptive
 if (windowWidth < 992) {
