@@ -1,5 +1,6 @@
 const tabs = document.querySelectorAll('.nav__tab'),
-    tabsText = ['', 'education', 'skills', 'portfolio', 'awards'],
+    tabsBar = document.querySelector('.nav__tabs')
+tabsText = ['', 'education', 'skills', 'portfolio', 'awards'],
     addressBar = document.querySelector('.nav__bar-text'),
     close = document.querySelector('#close'),
     maximize = document.querySelector('#maximize'),
@@ -98,7 +99,11 @@ tabs.forEach((item, i) => {
             swapClass(section[i], show, hide);
             toTop();
         }
+        tabsBar.classList.remove('hint');
+        next.forEach((item) => {
 
+            item.classList.remove('hint');
+        });
 
 
     });
@@ -112,7 +117,11 @@ next.forEach((item, i) => {
         swapClass(section[i + 1], show, hide);
         changeAddressBar(i + 1);
         toTop();
+        tabsBar.classList.remove('hint');
+        next.forEach((item) => {
 
+            item.classList.remove('hint');
+        });
     });
 });
 
@@ -166,21 +175,37 @@ commercialClose.addEventListener('click', () => {
 });
 
 //advice
+
 windowAdvice = document.querySelector('.advice');
 closeByButton(windowAdvice);
 
 function showAdviceByScroll() {
     if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-        swapClass(windowAdvice, 'show', 'hide');
+        next.forEach((item) => {
+
+            item.classList.add('hint');
+        });
+        tabsBar.classList.add('hint');
+
         window.removeEventListener('scroll', showAdviceByScroll);
-        document.body.style.overflow = 'hidden';
+
     }
 }
 window.addEventListener('scroll', showAdviceByScroll);
-windowAdvice.addEventListener('click', () => {
-    swapClass(windowAdvice, 'hide', 'show');
-    document.body.style.overflow = '';
-})
+next.forEach((item) => {
+    item.addEventListener('mouseover', () => {
+        tabsBar.classList.remove('hint');
+        next.forEach((item) => {
+            item.classList.remove('hint');
+        });
+    });
+});
+tabsBar.addEventListener('mouseover', () => {
+    tabsBar.classList.remove('hint');
+    next.forEach((item) => {
+        item.classList.remove('hint');
+    });
+});
 
 //adaptive
 if (windowWidth < 992) {
