@@ -2,7 +2,7 @@ const tabs = document.querySelectorAll('.nav__tab'),
     tabsBar = document.querySelector('.nav__tabs')
 tabsText = ['', 'education', 'skills', 'portfolio', 'awards'],
     addressBar = document.querySelector('.nav__bar-text'),
-    close = document.querySelector('#close'),
+    closeWindow = document.querySelector('#close'),
     maximize = document.querySelector('#maximize'),
     minimize = document.querySelector('#minimize'),
     elem = document.body,
@@ -125,7 +125,7 @@ next.forEach((item, i) => {
     });
 });
 
-close.addEventListener('click', () => {
+closeWindow.addEventListener('click', () => {
     window.close();
     setTimeout(function() {
         alert("Видимо Ваш браузер слишком силен, и я не могу побороть его");
@@ -216,4 +216,118 @@ if (windowWidth < 769) {
     section.forEach((item) => {
         swapClass(item, show, hide);
     });
+}
+
+
+
+//slider
+const slides = document.querySelectorAll('.slides'),
+    wrapper = document.querySelector('.awards__awards'),
+    prevBtn = document.querySelector('.awards__prev'),
+    nextBtn = document.querySelector('.awards__next'),
+    dotsWrapper = document.querySelector('.awards__dots');
+
+
+
+let slideIndex = 1,
+    dots = [];
+
+
+function hideSlides() {
+    slides.forEach((item) => {
+        item.style.opacity = '0';
+
+    });
+}
+hideSlides();
+slides[0].style.opacity = '1';
+
+
+for (let i = 0; i < slides.length; i++) {
+    const dot = document.createElement('div');
+    dot.classList.add('awards__dot');
+    dotsWrapper.append(dot);
+
+    dots.push(dot);
+    dots[0].classList.add('awards__dot-active');
+}
+
+function changeActiveDot() {
+    dots.forEach(dot => dot.classList.remove('awards__dot-active'));
+    dots[slideIndex - 1].classList.add('awards__dot-active');
+}
+nextBtn.addEventListener('click', () => {
+    if (slideIndex == slides.length) {
+        slideIndex = 1;
+    } else {
+        slideIndex++;
+    }
+    changeActiveDot();
+    hideSlides();
+    slides[slideIndex - 1].style.opacity = '1';
+
+});
+prevBtn.addEventListener('click', () => {
+    if (slideIndex == 1) {
+        slideIndex = slides.length;
+    } else {
+        slideIndex--;
+    }
+    console.log(slideIndex);
+    changeActiveDot();
+    hideSlides();
+    slides[slideIndex - 1].style.opacity = '1';
+});
+dots.forEach((dot, i) => {
+    dot.addEventListener('click', (e) => {
+        slideIndex = i + 1;
+        changeActiveDot();
+        hideSlides();
+        slides[slideIndex - 1].style.opacity = '1';
+    });
+});
+wrapper.addEventListener('touchstart', handleTouchStart);
+wrapper.addEventListener('touchmove', handleTouchMove);
+let x1 = null,
+    firstTouch;
+
+function handleTouchStart(e) {
+    firstTouch = e.touches[0];
+    x1 = firstTouch.clientX;
+    // console.log(firstTouch);
+    // console.log(x1);
+}
+console.log(firstTouch);
+console.log(x1);
+
+function handleTouchMove(e) {
+    if (!x1) {
+        return false;
+    }
+    let x2 = e.touches[0].clientX;
+    let xDiff = x2 - x1;
+    // console.log(x2);
+
+    console.log(xDiff);
+    if (xDiff > 0) {
+        if (slideIndex == 1) {
+            slideIndex = slides.length;
+        } else {
+            slideIndex--;
+        }
+        console.log(slideIndex);
+        changeActiveDot();
+        hideSlides();
+        slides[slideIndex - 1].style.opacity = '1';
+    } else {
+        if (slideIndex == slides.length) {
+            slideIndex = 1;
+        } else {
+            slideIndex++;
+        }
+        changeActiveDot();
+        hideSlides();
+        slides[slideIndex - 1].style.opacity = '1';
+    }
+    x1 = null;
 }
