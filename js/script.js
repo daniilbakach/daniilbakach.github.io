@@ -188,7 +188,7 @@ function showAdviceByScroll() {
 window.addEventListener('scroll', showAdviceByScroll);
 next.forEach((item) => {
     item.addEventListener('mouseover', () => {
-        addHint();
+        removeHint();
     });
 });
 tabsBar.addEventListener('mouseover', () => {
