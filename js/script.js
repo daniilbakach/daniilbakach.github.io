@@ -192,7 +192,7 @@ next.forEach((item) => {
     });
 });
 tabsBar.addEventListener('mouseover', () => {
-    addHint();
+    removeHint();
 });
 
 //adaptive
