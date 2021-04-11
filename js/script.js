@@ -1,77 +1,12 @@
-const tabs = document.querySelectorAll('.nav__tab'),
-    tabsBar = document.querySelector('.nav__tabs')
-tabsText = ['', 'education', 'skills', 'portfolio', 'awards'],
-    addressBar = document.querySelector('.nav__bar-text'),
-    closeWindow = document.querySelector('#close'),
-    maximize = document.querySelector('#maximize'),
-    minimize = document.querySelector('#minimize'),
-    elem = document.body,
-    next = document.querySelectorAll('.btn'),
-    section = document.querySelectorAll('section'),
-    modalWindow = document.querySelector('.modal'),
-    modalClose = document.querySelector('.modal__close'),
-    modalOpen = document.querySelectorAll('.contact'),
-    commercial = document.querySelector('.commercial'),
-    commercialClose = document.querySelector('.commercial__close'),
-    tabText = document.querySelectorAll(".nav__text"),
-    hide = 'hide',
-    show = 'show';
-windowWidth = window.innerWidth;
-
-function hideClass() {
-    tabs.forEach((item) => {
-
-        item.classList.remove('active');
-    });
-}
-
-function openFullscreen() {
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) {
-        elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-        elem.msRequestFullscreen();
-    }
-}
-
-function closeFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-    }
-}
-
-function addClass(elem, addClass) {
-    elem.classList.add(addClass);
-}
-
-function removeClass(elem, removeClass) {
-    elem.classList.remove(removeClass);
-}
-
+const windowWidth = window.innerWidth;
 function swapClass(elem, add, remove) {
-    addClass(elem, add);
-    removeClass(elem, remove);
-}
-
-function toggleClass(elem, toggleClass) {
-    elem.classList.toggle(toggleClass);
+    
+    elem.classList.add(add);
+    elem.classList.remove(remove);   
 }
 
 function changeAddressBar(index) {
     addressBar.innerText = `daniilbakach.github.io/${tabsText[index]}`;
-}
-
-function modalHide() {
-    swapClass(modalWindow, hide, show);
 }
 
 function toTop() {
@@ -86,45 +21,89 @@ function closeByButton(item) {
     });
 }
 
+
+
+//tabs
+const tabs = document.querySelectorAll('.nav__tab'),
+    tabsBar = document.querySelector('.nav__tabs'),
+    section = document.querySelectorAll('section'),
+    tabText = document.querySelectorAll(".nav__text"),
+tabsText = ['', 'education', 'skills', 'portfolio', 'awards'],
+    addressBar = document.querySelector('.nav__bar-text');
+
+    function hideClass() {
+        tabs.forEach((item) => {
+    
+            item.classList.remove('active');
+        });
+    }
 tabs.forEach((item, i) => {
     item.addEventListener('click', () => {
 
         if (!item.classList.contains('active')) {
             hideClass();
-            toggleClass(item, 'active');
+            item.classList.toggle('active');
             changeAddressBar(i);
             section.forEach((item) => {
-                swapClass(item, hide, show);
+                swapClass(item, 'hide', 'show');
             });
-            swapClass(section[i], show, hide);
+            swapClass(section[i], 'show', 'hide');
             toTop();
         }
-        tabsBar.classList.remove('hint');
-        next.forEach((item) => {
-
-            item.classList.remove('hint');
-        });
+        removeHint();
 
 
     });
 });
 
-next.forEach((item, i) => {
-    item.addEventListener('click', () => {
-        hideClass();
-        addClass(tabs[i + 1], 'active');
-        swapClass(section[i], hide, show);
-        swapClass(section[i + 1], show, hide);
-        changeAddressBar(i + 1);
-        toTop();
-        tabsBar.classList.remove('hint');
-        next.forEach((item) => {
 
-            item.classList.remove('hint');
+
+
+//window buttons
+
+const closeWindow = document.querySelector('#close'),
+    maximize = document.querySelector('#maximize'),
+    elem = document.body,
+    next = document.querySelectorAll('.btn'),
+    minimize = document.querySelector('#minimize');
+
+
+
+    function openFullscreen() {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        }
+    }
+    
+    function closeFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+
+    next.forEach((item, i) => {
+        item.addEventListener('click', () => {
+            hideClass();
+            tabs[i+1].classList.add('active');
+            swapClass(section[i], 'hide', 'show');
+            swapClass(section[i + 1], 'show', 'hide');
+            changeAddressBar(i + 1);
+            toTop();
+            removeHint();
         });
     });
-});
-
 closeWindow.addEventListener('click', () => {
     window.close();
     setTimeout(function() {
@@ -148,14 +127,17 @@ minimize.addEventListener('click', () => {
 });
 
 //modal
+const modalWindow = document.querySelector('.modal'),
+modalClose = document.querySelector('.modal__close'),
+modalOpen = document.querySelectorAll('.contact');
 modalClose.addEventListener('click', () => {
-    modalHide();
+    swapClass(modalWindow, 'hide', 'show');
     document.body.style.overflow = '';
 
 });
 modalOpen.forEach(item => {
     item.addEventListener('click', () => {
-        swapClass(modalWindow, show, hide);
+        swapClass(modalWindow, 'show', 'hide');
         document.body.style.overflow = 'hidden';
     });
 });
@@ -163,15 +145,16 @@ closeByButton(modalWindow);
 
 
 //commercial
+const     commercial = document.querySelector('.commercial'),
+commercialClose = document.querySelector('.commercial__close');
 setTimeout(() => {
     if (windowWidth > 992) {
-        swapClass(
-            commercial, 'flex', hide);
+        swapClass(commercial, 'flex', 'hide');
     }
 
 }, 20000);
 commercialClose.addEventListener('click', () => {
-    swapClass(commercial, hide, 'flex');
+    swapClass(commercial, 'hide', 'flex');
 });
 
 //advice
@@ -179,13 +162,24 @@ commercialClose.addEventListener('click', () => {
 windowAdvice = document.querySelector('.advice');
 closeByButton(windowAdvice);
 
-function showAdviceByScroll() {
-    if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+function addHint(){
+    next.forEach((item) => {
+
+        item.classList.add('hint');
+    });
+    tabsBar.classList.add('hint');
+}
+function removeHint(){
+    tabsBar.classList.remove('hint');
         next.forEach((item) => {
 
-            item.classList.add('hint');
+            item.classList.remove('hint');
         });
-        tabsBar.classList.add('hint');
+}
+function showAdviceByScroll() {
+    if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+        addHint();
+        
 
         window.removeEventListener('scroll', showAdviceByScroll);
 
@@ -194,17 +188,11 @@ function showAdviceByScroll() {
 window.addEventListener('scroll', showAdviceByScroll);
 next.forEach((item) => {
     item.addEventListener('mouseover', () => {
-        tabsBar.classList.remove('hint');
-        next.forEach((item) => {
-            item.classList.remove('hint');
-        });
+        addHint();
     });
 });
 tabsBar.addEventListener('mouseover', () => {
-    tabsBar.classList.remove('hint');
-    next.forEach((item) => {
-        item.classList.remove('hint');
-    });
+    addHint();
 });
 
 //adaptive
@@ -214,7 +202,7 @@ if (windowWidth < 992) {
 }
 if (windowWidth < 769) {
     section.forEach((item) => {
-        swapClass(item, show, hide);
+        swapClass(item, 'show', 'hide');
     });
 }
 
@@ -265,7 +253,6 @@ nextBtn.addEventListener('click', () => {
     changeActiveDot();
     hideSlides();
     slides[slideIndex - 1].style.opacity = '1';
-
 });
 prevBtn.addEventListener('click', () => {
     if (slideIndex == 1) {
@@ -294,8 +281,6 @@ let x1 = null,
 function handleTouchStart(e) {
     firstTouch = e.touches[0];
     x1 = firstTouch.clientX;
-    // console.log(firstTouch);
-    // console.log(x1);
 }
 console.log(firstTouch);
 console.log(x1);
